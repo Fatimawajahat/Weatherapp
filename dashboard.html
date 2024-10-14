@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <style>
+        body, html {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #e7e8f0;
+            height: auto; /* Instead of 100% */
+            overflow: auto;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+            padding: 10px 10px;
+        }
+
+        .header {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: flex-end; /* Aligns the search widget to the right */
+            align-items: center;
+            background: transparent;
+            position: relative; /* Ensures the header is correctly positioned */
+        }
+        .sidebar {
+            width: 80px;
+            background: #fff;
+            height: 97%; /* Slightly less than full height for aesthetic spacing */
+            padding: 10px 5px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 15px;
+            margin-top: 0%; /* Margin at the top to push it down */
+            position: fixed;
+        }
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: url('/images/logo.png') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            margin-left: 100px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .search-widget {
+            display: flex;
+            align-items: center;
+        }
+        .search-widget input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            outline: none;
+            width: 200px;
+        }
+        .search-button {
+            padding: 0;
+            margin-left: 5px;
+            background: #ffffff url('/images/srchpurp.png') no-repeat center center;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            color: transparent;
+            width: 40px;
+            height: 40px;
+            background-size: 70%; 
+        }
+        .search-button:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for hover effect */
+        }
+        .account-icon {
+            width: 40px;
+            height: 40px;
+            background: url('/images/me.HEIC') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+        input[type="text"], button {
+            padding: 10px;
+            margin: 5px;
+            display: inline-block;
+        }
+        .button-dash {
+            background: url('images/dashboard.png') no-repeat center center;
+            background-size: contain;  
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            color: transparent; 
+        }
+        .button-dash:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for hover effect */
+        }
+
+        .button-table {
+            background: url('images/table.png') no-repeat center center;
+            background-size: contain;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            color: transparent;
+        }
+        .button-table:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for hover effect */
+        }
+        
+        .weather-details {
+            width: 100%;
+            min-height: 400px;
+            max-height: 400px;
+            background: #4d4984;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px;
+            box-sizing: border-box;
+            color: #fff;
+        }
+
+        .charts-container {
+            display: flex;
+            justify-content: space-between; 
+            flex-wrap: wrap;
+            width: 100%;
+            margin-bottom: 20px; /* Adding space at the bottom */
+            max-width: 100%; /* Ensure charts don't overflow */
+        }
+
+        .chart {
+            flex: 1 1 calc(33.333% - 20px); /* Adjust width to be flexible */
+            max-width: 33%; /* Limit maximum width for responsiveness */
+            height: 250px;
+            margin: 10px;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 10px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .forecast-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 10px;
+            width: 100%;
+            flex-wrap: wrap; /* Wrap the items for smaller screens */
+            box-sizing: border-box;
+        }
+
+        .forecast-item {
+            flex: 1 1 calc(20% - 20px); /* Make each forecast item take 20% of the width */
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 10px;
+            margin-right: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: calc(15% - 20px); /* Ensure the width is flexible */
+        }
+
+
+        .forecast-item:last-child {
+            margin-right: 0; /* Removes the extra margin from the last item */
+        }
+
+        .forecast-item img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px; /* Space below the icon */
+        }
+
+        .forecast-item h5, .forecast-item p {
+            margin: 5px 0; /* Vertical spacing between text lines */
+            color: #333;
+            font-size: 14px; /* Consistent font size */
+        }
+        .forecast-controls, .pagination-controls {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .forecast-controls button, .pagination-controls button {
+            padding: 10px 15px;
+            margin-right: 10px;
+            background-color: #5658af;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .forecast-controls button:hover, .pagination-controls button:hover {
+            background-color: #404183;
+        }
+
+        .forecast-table table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .forecast-table th, .forecast-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .forecast-table th {
+            background-color: #f2f2f2;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%; 
+                height: 60px; 
+                display: flex;
+                flex-direction: row; 
+                justify-content: center; 
+                align-items: center; 
+                background: #fff; 
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+                z-index: 1000; 
+                position: fixed; 
+                top: 0;
+                left: 0;
+                padding: 0 10px; 
+            }
+
+            .logo, .button-dash, .button-table {
+                margin: 0 10px; 
+            }
+            .main-content {
+                margin-left: 0;
+                margin-top: 60px;
+            }
+            .header {
+                margin-left: 0;
+                text-align: center;
+            }
+            .chart {
+                flex: 1 1 100%;
+                max-width: 100%;
+                height: 200px;
+                margin: 10px auto;
+            }
+            .charts-container {
+                flex-direction: row; 
+            }
+            .forecast-item {
+                flex: 1 1 calc(100% - 20px); 
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo"></div>
+            <div class="button button-dash"></div>
+            <div class="button button-table"></div> 
+        </div>
+        <div class="main-content">
+            <div class="header">
+                <div class="search-widget">
+                    <input type="text" id="cityInput" placeholder="Enter a city name">
+                    <button class="search-button" onclick="getWeather()"></button>
+                    <div class="account-icon"></div>
+                </div>
+            </div>
+            <div class="weather-details" id="weatherDetails">
+                Weather details will appear here...
+            </div>
+            <div class="charts-container">
+                <canvas id="barChart" class="chart"></canvas> 
+                <canvas id="doughnutChart" class="chart"></canvas>
+                <canvas id="lineChart" class="chart"></canvas>
+            </div>
+
+            <div class="forecast-details" id="forecast-details">
+                <div class="forecast-item">
+                </div>
+                <div class="forecast-item">
+                </div>
+            </div>
+            <div class="forecast-controls">
+                <button onclick="sortTempsAsc()">Sort Ascending</button>
+                <button onclick="sortTempsDesc()">Sort Descending</button>
+                <button onclick="filterRainDays()">Show Only Rainy Days</button>
+                <button onclick="resetFilters()">Show All</button>
+                <button onclick="filterHighestTemperatureDay()">Show Highest temp</button>
+            </div>            
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script src="try.js"></script>
+</body>
+</html>
