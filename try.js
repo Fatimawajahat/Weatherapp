@@ -4,6 +4,8 @@ function getWeather() {
     const city = document.getElementById('cityInput').value;
     const apiKey = '9cef5226693e7fcd8ba755ce66fb1684'; 
     const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+    
+    document.getElementById('loadingSpinner').style.display = 'block';
 
     fetch(url)
         .then(response => {
@@ -30,8 +32,12 @@ function getWeather() {
             document.getElementById('weatherDetails').innerText = error.message === 'City not found'
                 ? 'City not found. Please try again.'
                 : 'Something went wrong. Please try again later.';
+        })
+        .finally(() => {
+            document.getElementById('loadingSpinner').style.display = 'none';
         });
 }
+
 
 
 
