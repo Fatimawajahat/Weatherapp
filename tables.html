@@ -131,136 +131,136 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
         }
 
-#forecastTable {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    background-color: #fff;
-    gap: 20px;
-    padding: 10px;
-    width: 100%;
-    border-radius: 8px;
-    flex-wrap: wrap; 
-    box-sizing: border-box;
-}
+        #forecastTable {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            background-color: #fff;
+            gap: 20px;
+            padding: 10px;
+            width: 100%;
+            border-radius: 8px;
+            flex-wrap: wrap; 
+            box-sizing: border-box;
+        }
 
-.forecast-item {
-    flex: 1 1 calc(20% - 20px);  /* Adjust width per item, considering margin */
-    background: #ffffff;
-    border-radius: 8px;
-    padding: 10px;
-    margin: 10px 10px 10px 0; /* Standard margin, no right margin on last item handled by :last-child */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    max-width: calc(20% - 20px); /* Ensures no overflow of elements */
-}
+        .forecast-item {
+            flex: 1 1 calc(20% - 20px);  
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 10px 10px 0; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: calc(20% - 20px); 
+        }
 
-.forecast-table td {
-    padding: 2px 8px;  /* Increased vertical padding, forced application */
-}
+        .forecast-table td {
+            padding: 2px 8px;  
+        }
 
-.forecast-table th {
-    padding: 14px 8px;  /* Slightly larger padding for header cells, forced application */
-    color: #404183;
-}
+        .forecast-table th {
+            padding: 14px 8px;  
+            color: #404183;
+        }
 
-.forecast-item:last-child {
-    margin-right: 0; /* Removes right margin on the last element */
-}
+        .forecast-item:last-child {
+            margin-right: 0; 
+        }
 
-.forecast-item img {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 10px; /* Space below the image */
-}
+        .forecast-item img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px; 
+        }
 
-.forecast-item h5, .forecast-item p {
-    margin: 5px 0; /* Vertical spacing for text elements */
-    color: #333; /* Dark grey text for readability */
-    font-size: 14px; /* Appropriate text size for readability */
-}
+        .forecast-item h5, .forecast-item p {
+            margin: 5px 0; 
+            color: #333; 
+            font-size: 14px; 
+        }
 
-/* Styles for Pagination Controls */
-.pagination-controls {
-    display: flex;
-    justify-content: center; /* Center the pagination buttons */
-    align-items: center;
-    margin: 20px 0; /* Vertical space around controls */
-}
 
-#prevPage, #nextPage {
-    padding: 10px 15px; /* Padding inside the buttons */
-    margin: 0 10px; /* Horizontal spacing between buttons */
-    background-color: #5658af; /* Primary button color */
-    color: white; /* Text color for contrast */
-    border: none; /* No borders */
-    border-radius: 5px; /* Rounded corners for buttons */
-    cursor: pointer; /* Pointer cursor on hover */
-}
+        .pagination-controls {
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            margin: 20px 0; 
+        }
 
-#prevPage:hover, #nextPage:hover {
-    background-color: #404183; /* Darker shade on hover for better user feedback */
-}
+        #prevPage, #nextPage {
+            padding: 10px 15px; 
+            margin: 0 10px; 
+            background-color: #5658af; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
 
-#pageInfo {
-    color: #333; /* Dark grey text color for readability */
-    font-size: 14px; /* Appropriate text size */
-}
+        #prevPage:hover, #nextPage:hover {
+            background-color: #404183; 
+        }
 
-.chatbot-container {
-    width: 100%; /* Full width */
-    background-color: rgb(255, 255, 255); /* Black background */
-    color: rgb(0, 0, 0); /* White text color */
-    padding: 10px; /* Padding around the chat */
-    box-sizing: border-box; /* Ensures padding is included in width */
-    min-height: 400px; /* Minimum height */
-    border-radius: 8px;
-}
-.spinner {
-    border: 6px solid #f3f3f3; /* Light grey */
-    border-top: 6px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+        #pageInfo {
+            color: #333;
+            font-size: 14px; 
+        }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+        .chatbot-container {
+            width: 100%; 
+            background-color: rgb(255, 255, 255); 
+            color: rgb(0, 0, 0); 
+            padding: 10px; 
+            box-sizing: border-box; 
+            min-height: 400px; 
+            border-radius: 8px;
+        }
+        .spinner {
+            border: 6px solid #f3f3f3; 
+            border-top: 6px solid #3498db; 
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
 
-.chatsrch {
-    border-radius: 8px;
-    background-color: #404183;
-    color: #fff;
-    border: none;
-}
-.chatsrch::placeholder {
-    color: #d3d3d3;
-    opacity: 1;
-}
-#chatAnswers {
-    height: 100%;
-    overflow-y: auto; /* Enables scrolling within chat area */
-}
-.city-name-header {
-    position: absolute;
-    top: 20px; /* Adjust this value as needed */
-    left: 9%; /* Center horizontally */
-    transform: translateX(-50%);
-    color: #404183; /* Set the color as needed */
-    font-size: 24px; /* Adjust size as needed */
-    font-weight: bold;
-}
-.botheading {
-    color: #404183;
-    font-weight: bolder;
-    padding: 10px;
-}
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .chatsrch {
+            border-radius: 8px;
+            background-color: #404183;
+            color: #fff;
+            border: none;
+        }
+        .chatsrch::placeholder {
+            color: #d3d3d3;
+            opacity: 1;
+        }
+        #chatAnswers {
+            height: 100%;
+            overflow-y: auto; 
+        }
+        .city-name-header {
+            position: absolute;
+            top: 20px; 
+            left: 9%; 
+            transform: translateX(-50%);
+            color: #404183; 
+            font-size: 24px; 
+            font-weight: bold;
+        }
+        .botheading {
+            color: #404183;
+            font-weight: bolder;
+            padding: 10px;
+        }
         @media (max-width: 768px) {
             .sidebar {
                 width: 100%; 

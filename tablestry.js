@@ -10,7 +10,6 @@ function fetchForecast() {
     city = document.getElementById('cityInput').value;
     const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
 
-    // Show the spinner before starting the fetch request
     document.getElementById('loadingSpinner').style.display = 'block';
 
     fetch(url)
@@ -34,7 +33,6 @@ function fetchForecast() {
             document.getElementById('forecastTable').innerHTML = "Error loading data. Please try again.";
         })
         .finally(() => {
-            // Hide the spinner after the fetch request completes
             document.getElementById('loadingSpinner').style.display = 'none';
         });
 }
