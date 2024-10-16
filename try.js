@@ -70,16 +70,16 @@ function setBackground(element, weatherCondition) {
     let imageUrl = '';
     switch (weatherCondition.toLowerCase()) {
         case 'clear':
-            imageUrl = "url('/images/weather/sun.png')";
+            imageUrl = "url('images/weather/sun.png')";
             break;
         case 'clouds':
-            imageUrl = "url('/images/weather/clouds.png')";
+            imageUrl = "url('images/weather/clouds.png')";
             break;
         case 'rain':
-            imageUrl = "url('/images/weather/rain.png')";
+            imageUrl = "url('images/weather/rain.png')";
             break;
         default:
-            imageUrl = "url('/images/weather/def.png')"; 
+            imageUrl = "url('images/weather/def.png')"; 
             break;
     }
     element.style.backgroundImage = imageUrl;
